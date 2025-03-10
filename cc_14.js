@@ -36,7 +36,7 @@ function newSupportTicket(customerName, issueDescription, priorityLevel){
 
 };
 
-newSupportTicket("Henry Farmer", "not recieving email", "Medium");
+newSupportTicket("Henry Farmer", "not receiving email", "Medium");
 newSupportTicket("Johnny Pham", "Website not working", "High");
 
 //Task 3: Converting NodeLists to Arrays for Bulk Updates
@@ -91,9 +91,9 @@ function ticketEditing(ticket){
        
       let newPriority = priorityInput.value.toLowerCase() ; 
       if (newPriority === "high") {
-        ticket.style.backgroundColor = "#ffcccb"; 
+        ticket.style.backgroundColor = "#ff6347"; 
     } else {
-        ticket.style.backgroundColor = "#add8e6"; 
+        ticket.style.backgroundColor = "#f5deb3"; 
     }
 
         
