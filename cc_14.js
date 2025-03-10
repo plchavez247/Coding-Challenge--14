@@ -12,6 +12,7 @@ function newSupportTicket(customerName, issueDescription, priorityLevel){
 
     const labelPriority = document.createElement("p");
     labelPriority.textContent = `Priority:${priorityLevel}`;
+    labelPriority.setAttribute("class", `priority-${priorityLevel.toLowerCase()}`);
 
     const resolveButton = document.createElement("button");
     resolveButton.textContent = "Resolve"
@@ -29,3 +30,17 @@ function newSupportTicket(customerName, issueDescription, priorityLevel){
 
 newSupportTicket("Henry Farmer", "not recieving email", "Medium");
 newSupportTicket("Johnny Pham", "Website not working", "High");
+
+//Task 3: Converting NodeLists to Arrays for Bulk Updates
+
+function highlightUrgentTickets(){
+    const highPriorityTickets = document.querySelectorAll(".priority-high");
+    const ticketArray = Array.from(highPriorityTickets);
+    ticketArray.forEach(ticket => {
+        ticket.style.backgroundColor = "lightcoral";
+        ticket.style.border = "2px solid darkred";
+    });
+   
+};
+
+highlightUrgentTickets();
