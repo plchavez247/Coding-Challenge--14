@@ -20,6 +20,14 @@ function newSupportTicket(customerName, issueDescription, priorityLevel){
         ticketContainer.removeChild(ticket);
         event.stopPropagation();
     });
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add("edit-button");
+    editButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        ticketEditing(ticket);
+    })
     ticket.appendChild(nameHeading)
     ticket.appendChild(issueDescrip);
     ticket.appendChild(labelPriority);
@@ -55,3 +63,49 @@ ticketContainer.addEventListener("click", (event)=> {
     console.log(`Customer Support Ticket Clicked: ${customerName}`);
     }
 });
+
+//Task 5: Inline Editing of Support Tickets
+function ticketEditing(ticket){
+    let nameHeading = ticket.querySelector("h2");
+    let issueDescrip = Array.from(ticket.querySelectorAll("p")).find(p =>!p.textContent.includes("Priority"));
+    let priorityLevel = Array.from (ticket.querySelectorAll("p")).find(p=> p.textContent.includes("Priority:"))
+    let editButton = ticket.querySelector(".edit-button");
+
+    let nameInput = document.createElement("input");
+    nameInput.value = nameHeading.textContent; 
+
+    let issueInput = document.createElement("input");
+    issueInput.value = issueDescrip.textContent;  
+
+    let priorityInput = document.createElement("input");
+    priorityInput.value = priorityLevel.textContent.replace("Priority: ", "");  
+    let saveButton = document.createElement("button");
+    saveButton.textContent = "Save";   
+    saveButton.className = "save-button";  
+
+    
+    saveButton.addEventListener("click", function() {
+        nameHeading.textContent = nameInput.value; 
+        issueDescrip.textContent = issueInput.value;
+        priorityLevel.textContent = `Priority: ${priorityInput.value}`; 
+       
+      let newPriority = priorityInput.value.toLowerCase() ; 
+      if (newPriority === "high") {
+        ticket.style.backgroundColor = "#ffcccb"; 
+    } else {
+        ticket.style.backgroundColor = "#add8e6"; 
+    }
+
+        
+        ticket.replaceChild(nameHeading, nameInput);   
+        ticket.replaceChild(issueDescrip, issueInput);
+        ticket.replaceChild(priorityLevel, priorityInput);
+        ticket.replaceChild(editButton, saveButton); 
+    });
+
+    
+    ticket.replaceChild(nameInput, nameHeading);
+    ticket.replaceChild(issueInput, issueDescrip);
+    ticket.replaceChild(priorityInput, priorityLevel);
+    ticket.replaceChild(saveButton, editButton);
+}
