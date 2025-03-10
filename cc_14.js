@@ -44,3 +44,14 @@ function highlightUrgentTickets(){
 };
 
 highlightUrgentTickets();
+
+//Task 4: Implementing Ticket Resolution with Event Bubbling
+const ticketContainer = document.getElementById("ticketContainer");
+ticketContainer.addEventListener("click", (event)=> {
+    const ticket = event.target.closest(`.ticket-card`)
+    if (ticket) {
+        const customerName =ticket.querySelector(`h2`).textContent; //used to get the actual Customer Name
+    
+    console.log(`Customer Support Ticket Clicked: ${customerName}`);
+    }
+});
